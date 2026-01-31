@@ -1,0 +1,138 @@
+---
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <style is:global>
+      :root {
+        --bg: #111;
+        --fg: #f4f4f4;
+        --muted: #9aa0a6;
+        --accent: #d6b36a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        line-height: 1.7;
+      }
+
+      main {
+        max-width: 42rem;
+        margin: 4rem auto 6rem;
+        padding: 0 1.25rem;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        line-height: 1.2;
+        margin-bottom: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      p {
+        margin: 1.25rem 0;
+      }
+
+      a {
+        color: var(--fg);
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.15em;
+      }
+
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+
+      header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 3rem;
+      }
+
+      nav {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .site-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .nav-links a {
+        margin-left: 1.5rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .nav-links a:hover {
+        color: var(--fg);
+      }
+
+      /* Post list styling (homepage, index pages) */
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      ul li::before {
+        content: "— ";
+        color: var(--muted);
+      }
+
+      /* Home page banner */
+      .home-banner {
+        margin: -3rem 0 3rem;
+      }
+
+      .home-banner img {
+        display: block;
+        width: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        border-radius: 6px;
+        mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+      }
+
+    </style>
+  </head>
+
+  <body>
+  <header>
+    <nav>
+      <a class="site-title" href="/">Your Blog</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/first-post">Posts</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>{title}</h1>
+    <slot />
+  </main>
+</body>
+
+</html>

@@ -1,17 +1,42 @@
 ---
+import EssayLayout from "../layouts/EssayLayout.astro";
 
+/**
+ * Grab all MDX pages except index.mdx and test.mdx
+ */
+const pages = import.meta.glob("./*.mdx", { eager: true });
+
+const posts = Object.entries(pages)
+  .filter(([path]) => !path.includes("test.mdx"))
+  .map(([path, mod]) => {
+    const slug = path.replace("./", "").replace(".mdx", "");
+    return {
+      slug,
+      title: mod.frontmatter?.title ?? slug,
+    };
+  });
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<EssayLayout>
+<div class="home-banner">
+  <img
+    src="/omw.png"
+    alt="Old Man’s Words — fantasy and science fiction reflections"
+  />
+</div>
+
+<p>
+  My SF&F blog. (intro coming)
+</p>
+
+<h2>Recent posts</h2>
+
+<ul>
+  {posts.map(post => (
+    <li>
+      <a href={`/${post.slug}`}>{post.title}</a>
+    </li>
+  ))}
+</ul>
+
+</EssayLayout>

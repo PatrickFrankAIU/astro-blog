@@ -1,0 +1,47 @@
+---
+const { src, alt, caption, float } = Astro.props;
+---
+
+<figure class={float ? `float-${float}` : ""}>
+  <img src={src} alt={alt} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+figure {
+  margin: 2rem 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+.float-right {
+  float: right;
+  max-width: 45%;
+  margin-left: 1.5rem;
+}
+
+.float-left {
+  float: left;
+  max-width: 45%;
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .float-right,
+  .float-left {
+    float: none;
+    max-width: 100%;
+    margin: 2rem 0;
+  }
+}
+</style>
